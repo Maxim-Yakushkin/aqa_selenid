@@ -52,7 +52,7 @@ public class SearchFrame extends BasePage {
         return $$x("//ul[@class='search__results']//div[contains(@class,'result__item_category')]")
                 .shouldBe(allMatch("all elements displayed", WebElement::isDisplayed))
                 .shouldHave(allMatch("text for each element is not blank", el -> !el.getText().isBlank()))
-                .shouldHave(allMatch("Category name is not blank", el ->
+                .shouldHave(allMatch("category name is not blank", el ->
                         !el.getText().split("\n")[indexOfCategoryName].isBlank()))
                 .shouldHave(allMatch("info about count of items is not blank and contains key word", el ->
                         !el.getText().split("\n")[indexOfCountOfItems].isBlank() &&
