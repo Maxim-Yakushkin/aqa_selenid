@@ -62,7 +62,7 @@ public class SearchFrame extends BasePage {
     public ElementsCollection getNewsSearchResultWithVideo() {
         return $$x("//div[contains(@class,'result__item result__item_news')]")
                 .shouldBe(allMatch("displayed", WebElement::isDisplayed))
-                .shouldHave(allMatch("part_1", el ->
+                .shouldHave(allMatch("contains preview and data", el ->
                         el.findElement(className("news__preview")).isDisplayed() &&
                         el.findElement(className("news__data")).isDisplayed()));
     }
