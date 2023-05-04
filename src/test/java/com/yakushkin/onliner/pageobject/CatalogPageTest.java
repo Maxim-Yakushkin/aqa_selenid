@@ -1,18 +1,17 @@
-package com.yakushkin.pageobject.onliner;
+package com.yakushkin.onliner.pageobject;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
+import com.yakushkin.onliner.pageobject.CatalogPage;
+import com.yakushkin.onliner.pageobject.CategoryPage;
 import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 import static com.yakushkin.helper.MessageHelper.ACTUAL_AND_EXPECTED_SIZE_DOESNT_MATH_MESSAGE;
-import static com.yakushkin.pageobject.onliner.CatalogPage.getCategoryInfos;
-import static com.yakushkin.pageobject.onliner.CatalogPage.getPartOfCategoryInfos;
+import static com.yakushkin.onliner.pageobject.CatalogPage.getCategoryInfos;
+import static com.yakushkin.onliner.pageobject.CatalogPage.getPartOfCategoryInfos;
 
 public class CatalogPageTest {
 

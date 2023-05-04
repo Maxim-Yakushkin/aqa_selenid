@@ -1,7 +1,6 @@
-package com.yakushkin.pageobject.onliner;
+package com.yakushkin.onliner.pageobject;
 
-import com.yakushkin.framework.DriverManager;
-import org.testng.annotations.AfterClass;
+import com.yakushkin.onliner.pageobject.MainPage;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

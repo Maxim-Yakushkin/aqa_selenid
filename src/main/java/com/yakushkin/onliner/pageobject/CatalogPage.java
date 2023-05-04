@@ -1,7 +1,6 @@
-package com.yakushkin.pageobject.onliner;
+package com.yakushkin.onliner.pageobject;
 
 import com.codeborne.selenide.ElementsCollection;
-import com.yakushkin.pageobject.BasePage;
 import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
@@ -12,7 +11,7 @@ import static com.codeborne.selenide.CollectionCondition.containExactTextsCaseSe
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.yakushkin.url.OnlinerBaseUrl.CATALOG_PAGE_URL;
+import static com.yakushkin.enumiration.OnlinerBaseUrl.CATALOG_PAGE_URL;
 import static java.time.Duration.ofSeconds;
 import static org.openqa.selenium.By.xpath;
 

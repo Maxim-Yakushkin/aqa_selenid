@@ -1,4 +1,4 @@
-package com.yakushkin.pageobject;
+package com.yakushkin.onliner.pageobject;
 
 import com.codeborne.selenide.Browsers;
 import com.codeborne.selenide.Configuration;
@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.switchTo;
-import static com.yakushkin.url.OnlinerBaseUrl.MAIN_PAGE_URL;
+import static com.yakushkin.enumiration.OnlinerBaseUrl.MAIN_PAGE_URL;
 
 public class SelenideDemoTest {
 

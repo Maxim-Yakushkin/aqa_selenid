@@ -1,10 +1,8 @@
-package com.yakushkin.pageobject.onliner;
-
-import com.yakushkin.pageobject.BasePage;
+package com.yakushkin.onliner.pageobject;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.yakushkin.url.OnlinerBaseUrl.MAIN_PAGE_URL;
+import static com.yakushkin.enumiration.OnlinerBaseUrl.MAIN_PAGE_URL;
 import static java.time.Duration.ofSeconds;
 
 public class MainPage extends BasePage {

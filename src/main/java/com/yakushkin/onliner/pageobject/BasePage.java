@@ -1,13 +1,12 @@
-package com.yakushkin.pageobject;
+package com.yakushkin.onliner.pageobject;
 
 import com.codeborne.selenide.Browsers;
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.SelenideElement;
 import com.yakushkin.framework.DriverManager;
 import com.yakushkin.util.UtilWebElement;
 import lombok.Data;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,15 +14,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Condition.and;
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static java.time.Duration.ofSeconds;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Data
 public abstract class BasePage {
 
-//    private final WebDriver driver;
+    //    private final WebDriver driver;
     private final UtilWebElement utilWebElement;
 
     public BasePage() {
@@ -69,6 +72,22 @@ public abstract class BasePage {
     public void clickOnElement(By by) {
         final WebElement element = findElementWithWaiting(by);
         element.click();
+    }
+
+    public SearchFrame typingIntoSearchLine(String request) {
+        $x("//input[@class='fast-search__input']")
+                .shouldBe(visible, ofSeconds(5))
+                .sendKeys(request);
+        switchToSearchFrame();
+
+        return new SearchFrame();
+    }
+
+    public SearchFrame switchToSearchFrame() {
+        final SelenideElement searchFrame = $x("//iframe[@class='modal-iframe']")
+                .should(and("active", exist, visible), ofSeconds(5));
+        switchTo().frame(searchFrame);
+        return new SearchFrame();
     }
 
 }

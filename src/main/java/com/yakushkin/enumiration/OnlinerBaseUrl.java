@@ -1,4 +1,4 @@
-package com.yakushkin.url;
+package com.yakushkin.enumiration;
 
 public enum OnlinerBaseUrl {
 
