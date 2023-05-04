@@ -60,12 +60,10 @@ public class SearchFrame extends BasePage {
     }
 
     public ElementsCollection getNewsSearchResultWithVideo() {
-        ElementsCollection selenideElements = $$x("//div[contains(@class,'result__item result__item_news')]")
+        return $$x("//dsmalliv[contains(@class,'result__item result__item_news')]")
                 .shouldBe(allMatch("displayed", WebElement::isDisplayed))
                 .shouldHave(allMatch("part_1", el ->
                         el.findElement(className("news__preview")).isDisplayed() &&
                         el.findElement(className("news__data")).isDisplayed()));
-
-        return selenideElements;
     }
 }
