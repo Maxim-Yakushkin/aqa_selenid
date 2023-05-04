@@ -1,12 +1,19 @@
 package com.yakushkin.pageobject.onliner;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.yakushkin.pageobject.BasePage;
 import org.openqa.selenium.WebElement;
 
+import java.util.Arrays;
 import java.util.List;
 
+import static com.codeborne.selenide.CollectionCondition.allMatch;
+import static com.codeborne.selenide.CollectionCondition.containExactTextsCaseSensitive;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.$x;
 import static com.yakushkin.url.OnlinerBaseUrl.CATALOG_PAGE_URL;
-import static org.openqa.selenium.By.className;
+import static java.time.Duration.ofSeconds;
 import static org.openqa.selenium.By.xpath;
 
 public class CatalogPage extends BasePage {
@@ -23,60 +30,67 @@ public class CatalogPage extends BasePage {
         return this;
     }
 
-    public List<WebElement> getAllCatalogNavigationClassifiers() {
-        return findElementsWithWaiting(xpath(CATALOG_NAVIGATION_CLASSIFIER_ITEM_XPATH));
-    }
+    public ElementsCollection getAllCatalogNavigationClassifiers() {
+        final List<String> expectedClassifierTitles = Arrays.asList("Электроника", "Компьютеры и сети",
+                "Бытовая техника", "На каждый день", "Стройка и ремонт",
+                "Дом и сад", "Авто и мото", "Красота и спорт", "Детям и мамам");
 
-    public void areCatalogNavigationClassifiersDisplayed() {
-        areElementsDisplayed(xpath(CATALOG_NAVIGATION_CLASSIFIER_ITEM_XPATH));
+        return $$x(CATALOG_NAVIGATION_CLASSIFIER_ITEM_XPATH)
+                .shouldBe(allMatch("visible", WebElement::isDisplayed), ofSeconds(10))
+                .shouldHave(containExactTextsCaseSensitive(expectedClassifierTitles));
     }
 
     public CatalogPage clickOnComputersAndNetworksClassifier() {
-        final WebElement computersAndNetworksClassifier = findElementWithWaiting(xpath(String.format(CATALOG_CLASSIFIER_XPATH_PATTERN, "Компьютеры")));
-        computersAndNetworksClassifier.click();
+        $x(String.format(CATALOG_CLASSIFIER_XPATH_PATTERN, "Компьютеры"))
+                .shouldBe(visible, ofSeconds(10))
+                .click();
         return this;
     }
 
 
     public CatalogPage clickOnElectronicsClassifier() {
-        final WebElement computersAndNetworksClassifier = findElementWithWaiting(xpath(String.format(CATALOG_CLASSIFIER_XPATH_PATTERN, "Электроника")));
-        computersAndNetworksClassifier.click();
+        $x(String.format(CATALOG_CLASSIFIER_XPATH_PATTERN, "Электроника"))
+                .shouldBe(visible, ofSeconds(10))
+                .click();
         return this;
     }
 
     public CategoryPage clickOnHeadPhoneCategory() {
-        final WebElement headPhoneCategory = findElementWithWaiting(xpath(String.format(CATEGORY_XPATH_PATTERN, "Аудиотехника", "Наушники")));
-        headPhoneCategory.click();
+        $x(String.format(CATEGORY_XPATH_PATTERN, "Аудиотехника", "Наушники"))
+                .shouldBe(visible, ofSeconds(10))
+                .click();
         return new CategoryPage();
     }
 
-    public CatalogPage moveToAccessoriesAsideTitle() {
-        final WebElement element = findElementWithWaiting(xpath(String.format(COMPUTER_AND_NETWORKS_VERTICAL_MENU_XPATH_PATTERN, "Комплектующие")));
-        getUtilWebElement().moveToElement(element);
+    public CatalogPage hoverToAccessoriesAsideTitle() {
+        $x(String.format(COMPUTER_AND_NETWORKS_VERTICAL_MENU_XPATH_PATTERN, "Комплектующие"))
+                .shouldBe(visible, ofSeconds(10))
+                .hover();
         return this;
     }
 
-    public CatalogPage moveToAudioEquipmentAsideTitle() {
-        final WebElement element = findElementWithWaiting(xpath(String.format(COMPUTER_AND_NETWORKS_VERTICAL_MENU_XPATH_PATTERN, "Аудиотехника")));
-        getUtilWebElement().moveToElement(element);
+    public CatalogPage hoverToAudioEquipmentAsideTitle() {
+        $x(String.format(COMPUTER_AND_NETWORKS_VERTICAL_MENU_XPATH_PATTERN, "Аудиотехника"))
+                .shouldBe(visible, ofSeconds(10))
+                .hover();
         return this;
     }
 
-    public List<WebElement> getCategoriesForAccessories() {
-        return findElementsWithWaiting(xpath(String.format(ALL_CATEGORIES_BY_POINT_FROM_VERTICAL_MENU_XPATH_PATTERN, "Комплектующие")));
+    public ElementsCollection getCategoriesForAccessories() {
+        return $$x(String.format(ALL_CATEGORIES_BY_POINT_FROM_VERTICAL_MENU_XPATH_PATTERN, "Комплектующие"))
+                .shouldBe(allMatch("visible", WebElement::isDisplayed));
     }
 
-    public static List<String> getCategoryTitles(List<WebElement> categories) {
-        return categories.stream()
-                .map(categoryLink -> categoryLink.findElement(className("catalog-navigation-list__dropdown-title")))
-                .map(WebElement::getText)
+    public static List<String[]> getCategoryInfos(ElementsCollection categories) {
+        return categories.texts().stream()
+                .map(description -> description.split("\n"))
                 .toList();
     }
 
-    public static List<String> getPartOfCategoryDescription(int indexOfDescriptionPart, List<WebElement> categories) {
+    public static List<String> getPartOfCategoryInfos(int indexOfDescriptionPart, List<String[]> categories) {
         return categories.stream()
-                .map(categoryLink -> categoryLink.findElement(className("catalog-navigation-list__dropdown-description")).getText())
-                .map(description -> description.split(" ")[indexOfDescriptionPart])
+                .map(description -> description[indexOfDescriptionPart])
+                .filter(partOfDescription -> !partOfDescription.isBlank())
                 .toList();
     }
 
@@ -85,10 +99,13 @@ public class CatalogPage extends BasePage {
                                         "/div[@class='catalog-navigation-list__aside-list']"));
     }
 
-    public List<WebElement> getComputerAndNetworksVerticalMenuPoints() {
-        return findElementsWithWaiting(xpath("" +
-                                             "//div[contains(@class,'aside catalog-navigation-list__aside_active')]" +
-                                             "//div[contains(@class,'catalog-navigation-list__aside-list')]" +
-                                             "//div[contains(@class,'title')]"));
+    public ElementsCollection getComputerAndNetworksVerticalMenuPoints() {
+        final List<String> expectedVerticalMenuPointTitles = Arrays.asList("Ноутбуки, компьютеры, мониторы", "Комплектующие");
+
+        return $$x("//div[contains(@class,'aside catalog-navigation-list__aside_active')]" +
+                   "//div[contains(@class,'catalog-navigation-list__aside-list')]" +
+                   "//div[contains(@class,'title')]")
+                .shouldBe(allMatch("visible", WebElement::isDisplayed))
+                .shouldHave(containExactTextsCaseSensitive(expectedVerticalMenuPointTitles));
     }
 }

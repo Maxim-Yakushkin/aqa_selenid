@@ -14,11 +14,6 @@ public class MainPageTest {
         mainPage = new MainPage();
     }
 
-    @AfterClass
-    void closeAndClean() {
-        DriverManager.closeBrowser();
-    }
-
     @Test
     public void openMainPage() {
         mainPage.open();

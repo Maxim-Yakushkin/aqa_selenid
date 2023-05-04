@@ -1,22 +1,22 @@
 package com.yakushkin.util;
 
-import com.yakushkin.framework.DriverManager;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+
 public class UtilWebElement {
 
-    private final WebDriver driver;
+//    private final WebDriver driver;
 
-    public UtilWebElement() {
-        this.driver = DriverManager.getWebDriver();
-    }
+//    public UtilWebElement() {
+//        this.driver = DriverManager.getWebDriver();
+//    }
 
     public void moveToElement(WebElement element) {
-        new Actions(driver)
+        new Actions(getWebDriver())
                 .moveToElement(element)
                 .perform();
     }
