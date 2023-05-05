@@ -21,8 +21,8 @@ public class SelenideDemoTest {
         SelenideElement userNameInput = $x("//input[contains(@placeholder,'Ник или e-mail')]");
         SelenideElement passwordInput = $x("//input[contains(@placeholder,'Пароль')]");
         SelenideElement loginButton = $x("//button[contains(text(),'Войти')]");
-        userNameInput.setValue("max-yakushkin1@yandex.ru");
-        passwordInput.setValue("maxior3320");
+        userNameInput.setValue("e-mail"); // need to type an e-mail
+        passwordInput.setValue("password"); // need to type a password
         loginButton.click();
         switchTo().frame($x("//iframe[@title='reCAPTCHA']"));
         SelenideElement recaptchaCheckbox = $x("//label[contains(text(),'Я не робот')]");
