@@ -21,6 +21,11 @@ public class CatalogPageTest {
     }
 
     @Test
+    void checkOpenCatalogPage() {
+        catalogPage.open();
+    }
+
+    @Test
     void checkNavigationTitle() {
         catalogPage
                 .open()

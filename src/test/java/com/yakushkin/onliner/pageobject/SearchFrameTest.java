@@ -21,7 +21,7 @@ public class SearchFrameTest {
     }
 
     @Test
-    void getSearchResultCategoriesInCatalogTab() {
+    void checkSearchResultCategoriesInCatalogTab() {
         mainPage
                 .open()
                 .typingIntoSearchLine("lego")
@@ -29,7 +29,7 @@ public class SearchFrameTest {
     }
 
     @Test
-    void getSearchResultInNewsTabWithSelectedCheckBoxWithVideo() {
+    void checkSearchResultInNewsTabWithSelectedCheckBoxWithVideo() {
         mainPage
                 .open()
                 .typingIntoSearchLine("lego")

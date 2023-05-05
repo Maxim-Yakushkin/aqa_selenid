@@ -3,9 +3,10 @@ package com.yakushkin.onliner.pageobject;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverConditions;
+import com.yakushkin.enumiration.CatalogNavigationClassifier;
+import com.yakushkin.enumiration.ComputerAndNetworksVerticalMenuPoint;
 import org.openqa.selenium.WebElement;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.allMatch;
@@ -18,6 +19,7 @@ import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.webdriver;
 import static com.yakushkin.enumiration.OnlinerBaseUrl.CATALOG_PAGE_URL;
 import static java.time.Duration.ofSeconds;
+import static java.util.Arrays.stream;
 
 public class CatalogPage extends BasePage {
 
@@ -30,6 +32,10 @@ public class CatalogPage extends BasePage {
     @Override
     public CatalogPage open() {
         navigateTo(CATALOG_PAGE_URL.getUrl());
+        webdriver()
+                .shouldHave(WebDriverConditions.url(CATALOG_PAGE_URL.getUrl()))
+                .shouldHave(WebDriverConditions.title(CATALOG_PAGE_URL.getTitle()));
+
         return this;
     }
 
@@ -44,9 +50,9 @@ public class CatalogPage extends BasePage {
     }
 
     public ElementsCollection getAllCatalogNavigationClassifiers() {
-        final List<String> expectedClassifierTitles = Arrays.asList("Электроника", "Компьютеры и сети",
-                "Бытовая техника", "На каждый день", "Стройка и ремонт",
-                "Дом и сад", "Авто и мото", "Красота и спорт", "Детям и мамам");
+        final List<String> expectedClassifierTitles = stream(CatalogNavigationClassifier.values())
+                .map(CatalogNavigationClassifier::getTitle)
+                .toList();
 
         return $$x(CATALOG_NAVIGATION_CLASSIFIER_ITEM_XPATH)
                 .shouldBe(allMatch("visible", WebElement::isDisplayed), ofSeconds(10))
@@ -108,7 +114,9 @@ public class CatalogPage extends BasePage {
     }
 
     public ElementsCollection getComputerAndNetworksVerticalMenuPoints() {
-        final List<String> expectedVerticalMenuPointTitles = Arrays.asList("Ноутбуки, компьютеры, мониторы", "Комплектующие");
+        final List<String> expectedVerticalMenuPointTitles = stream(ComputerAndNetworksVerticalMenuPoint.values())
+                .map(ComputerAndNetworksVerticalMenuPoint::getName)
+                .toList();
 
         return $$x("//div[contains(@class,'aside catalog-navigation-list__aside_active')]" +
                    "//div[contains(@class,'catalog-navigation-list__aside-list')]" +

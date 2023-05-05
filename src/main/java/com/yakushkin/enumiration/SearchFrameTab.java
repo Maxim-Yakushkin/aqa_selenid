@@ -1,6 +1,6 @@
 package com.yakushkin.enumiration;
 
-public enum SearchFrameTabs {
+public enum SearchFrameTab {
     IN_CATALOG("в каталоге"),
     IN_NEWS("в новостях"),
     IN_FLEA_MARKET("на барахолке"),
@@ -8,7 +8,7 @@ public enum SearchFrameTabs {
 
     private final String name;
 
-    SearchFrameTabs(String name) {
+    SearchFrameTab(String name) {
         this.name = name;
     }
 

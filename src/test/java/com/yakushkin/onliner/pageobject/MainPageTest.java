@@ -13,7 +13,7 @@ public class MainPageTest {
     }
 
     @Test
-    public void openMainPage() {
+    public void checkOpenMainPage() {
         mainPage.open();
     }
 

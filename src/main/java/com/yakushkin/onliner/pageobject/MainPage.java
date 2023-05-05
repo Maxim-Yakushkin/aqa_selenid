@@ -17,6 +17,10 @@ public class MainPage extends BasePage {
     @Override
     public MainPage open() {
         navigateTo(MAIN_PAGE_URL.getUrl());
+        webdriver()
+                .shouldHave(WebDriverConditions.url(MAIN_PAGE_URL.getUrl()))
+                .shouldHave(WebDriverConditions.title(MAIN_PAGE_URL.getTitle()));
+
         return this;
     }
 

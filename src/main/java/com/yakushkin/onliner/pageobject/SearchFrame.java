@@ -2,7 +2,7 @@ package com.yakushkin.onliner.pageobject;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
-import com.yakushkin.enumiration.SearchFrameTabs;
+import com.yakushkin.enumiration.SearchFrameTab;
 import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
@@ -22,13 +22,13 @@ public class SearchFrame extends BasePage {
         return $$x("//div[contains(@class,'search__tabs-item')]")
                 .shouldBe(allMatch("all elements displayed", WebElement::isDisplayed))
                 .shouldHave(allMatch("text for each element is not blank", el -> !el.getText().isBlank()))
-                .shouldHave(size(SearchFrameTabs.values().length), Duration.ofSeconds(5))
-                .shouldHave(exactTexts(stream(SearchFrameTabs.values()).map(SearchFrameTabs::getName).toList()));
+                .shouldHave(size(SearchFrameTab.values().length), Duration.ofSeconds(5))
+                .shouldHave(exactTexts(stream(SearchFrameTab.values()).map(SearchFrameTab::getName).toList()));
     }
 
     public SearchFrame clickOnNews() {
         getAllSearchTabItems()
-                .filter(Condition.text(SearchFrameTabs.IN_NEWS.getName()))
+                .filter(Condition.text(SearchFrameTab.IN_NEWS.getName()))
                 .first()
                 .click();
 
