@@ -1,7 +1,6 @@
 package com.yakushkin.onliner.pageobject;
 
 import com.codeborne.selenide.ElementsCollection;
-import com.yakushkin.onliner.pageobject.BasePage;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;

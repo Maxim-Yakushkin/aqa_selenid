@@ -1,8 +1,6 @@
 package com.yakushkin.onliner.pageobject;
 
 import com.codeborne.selenide.ElementsCollection;
-import com.yakushkin.onliner.pageobject.CatalogPage;
-import com.yakushkin.onliner.pageobject.CategoryPage;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -20,6 +18,13 @@ public class CatalogPageTest {
     @BeforeClass
     void init() {
         catalogPage = new CatalogPage();
+    }
+
+    @Test
+    void checkNavigationTitle() {
+        catalogPage
+                .open()
+                .getNavigationTitle();
     }
 
     @Test

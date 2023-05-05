@@ -1,6 +1,8 @@
 package com.yakushkin.onliner.pageobject;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverConditions;
 import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
@@ -8,12 +10,14 @@ import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.allMatch;
 import static com.codeborne.selenide.CollectionCondition.containExactTextsCaseSensitive;
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.webdriver;
 import static com.yakushkin.enumiration.OnlinerBaseUrl.CATALOG_PAGE_URL;
 import static java.time.Duration.ofSeconds;
-import static org.openqa.selenium.By.xpath;
 
 public class CatalogPage extends BasePage {
 
@@ -27,6 +31,16 @@ public class CatalogPage extends BasePage {
     public CatalogPage open() {
         navigateTo(CATALOG_PAGE_URL.getUrl());
         return this;
+    }
+
+    public SelenideElement getNavigationTitle() {
+        webdriver()
+                .shouldHave(WebDriverConditions.url(CATALOG_PAGE_URL.getUrl()))
+                .shouldHave(WebDriverConditions.title(CATALOG_PAGE_URL.getTitle()));
+
+        return $x("//div[@class='catalog-navigation__title']")
+                .shouldBe(exist, visible)
+                .shouldHave(text("Каталог"));
     }
 
     public ElementsCollection getAllCatalogNavigationClassifiers() {
@@ -91,11 +105,6 @@ public class CatalogPage extends BasePage {
                 .map(description -> description[indexOfDescriptionPart])
                 .filter(partOfDescription -> !partOfDescription.isBlank())
                 .toList();
-    }
-
-    public boolean isComputerAndNetworksVerticalMenuDisplayed() {
-        return isElementDisplayed(xpath("//div[contains(@class,'catalog-navigation-list__aside_active')]" +
-                                        "/div[@class='catalog-navigation-list__aside-list']"));
     }
 
     public ElementsCollection getComputerAndNetworksVerticalMenuPoints() {

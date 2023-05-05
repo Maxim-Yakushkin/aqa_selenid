@@ -3,7 +3,6 @@ package com.yakushkin.onliner.pageobject;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.yakushkin.enumiration.SearchFrameTabs;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
@@ -16,7 +15,6 @@ import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.util.Arrays.stream;
 import static org.openqa.selenium.By.className;
-import static org.openqa.selenium.By.xpath;
 
 public class SearchFrame extends BasePage {
 

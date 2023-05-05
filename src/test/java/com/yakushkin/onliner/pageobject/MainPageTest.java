@@ -1,6 +1,5 @@
 package com.yakushkin.onliner.pageobject;
 
-import com.yakushkin.onliner.pageobject.MainPage;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
