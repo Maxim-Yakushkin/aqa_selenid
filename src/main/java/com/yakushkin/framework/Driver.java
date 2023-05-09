@@ -1,13 +1,15 @@
 package com.yakushkin.framework;
 
+import com.codeborne.selenide.Browsers;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.Arrays;
 
 public enum Driver {
 
-    EDGE("edge", new EdgeDriverCreator()),
-    CHROME("chrome", new ChromeDriverCreator());
+    EDGE(Browsers.EDGE, new EdgeDriverCreator()),
+    CHROME(Browsers.CHROME, new ChromeDriverCreator()),
+    FIREFOX(Browsers.FIREFOX, new FirefoxDriverCreator());
 
     private final String driverName;
     private final WebDriverCreator<RemoteWebDriver> webDriverCreator;

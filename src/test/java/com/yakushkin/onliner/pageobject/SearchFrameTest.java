@@ -1,7 +1,10 @@
 package com.yakushkin.onliner.pageobject;
 
+import com.codeborne.selenide.Browsers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import static com.yakushkin.framework.DriverManager.initDriver;
 
 public class SearchFrameTest {
 
@@ -9,6 +12,7 @@ public class SearchFrameTest {
 
     @BeforeClass
     void init() {
+        initDriver(Browsers.FIREFOX);
         mainPage = new MainPage();
     }
 

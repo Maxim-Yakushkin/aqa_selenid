@@ -1,27 +1,27 @@
 package com.yakushkin.onliner.pageobject;
 
-import com.codeborne.selenide.Browsers;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.yakushkin.framework.DriverManager;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 
 import static com.codeborne.selenide.Condition.and;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.switchTo;
+import static com.yakushkin.framework.DriverManager.initDriver;
 import static java.time.Duration.ofSeconds;
 
 @Data
 public abstract class BasePage {
 
     public BasePage() {
-        DriverManager.initDriver(Browsers.FIREFOX);
+        initDriver();
     }
 
     public BasePage open() {
-        navigateTo("");
+        navigateTo(StringUtils.EMPTY);
         return this;
     }
 
