@@ -1,13 +1,16 @@
 package com.yakushkin.onliner.pageobject;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverConditions;
 
+import static com.codeborne.selenide.Condition.and;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.webdriver;
-import static com.yakushkin.enumiration.OnlinerBaseUrl.MAIN_PAGE_URL;
+import static com.codeborne.selenide.WebDriverConditions.title;
+import static com.codeborne.selenide.WebDriverConditions.url;
+import static com.yakushkin.enumiration.OnlinerBaseUrl.MAIN_PAGE;
 import static java.time.Duration.ofSeconds;
 
 public class MainPage extends BasePage {
@@ -16,21 +19,21 @@ public class MainPage extends BasePage {
 
     @Override
     public MainPage open() {
-        navigateTo(MAIN_PAGE_URL.getUrl());
+        Selenide.open(MAIN_PAGE.getUrl());
         webdriver()
-                .shouldHave(WebDriverConditions.url(MAIN_PAGE_URL.getUrl()))
-                .shouldHave(WebDriverConditions.title(MAIN_PAGE_URL.getTitle()));
+                .shouldHave(url(MAIN_PAGE.getUrl()))
+                .shouldHave(title(MAIN_PAGE.getTitle()));
 
         return this;
     }
 
     public SelenideElement getNavigationLogo() {
         webdriver()
-                .shouldHave(WebDriverConditions.url(MAIN_PAGE_URL.getUrl()))
-                .shouldHave(WebDriverConditions.title(MAIN_PAGE_URL.getTitle()));
+                .shouldHave(url(MAIN_PAGE.getUrl()))
+                .shouldHave(title(MAIN_PAGE.getTitle()));
 
         return $x("//div[@class='b-top-logo']")
-                .shouldBe(exist, visible);
+                .shouldBe(and("presented and displayed", exist, visible), ofSeconds(5));
     }
 
     public CatalogPage goToCatalogSection() {

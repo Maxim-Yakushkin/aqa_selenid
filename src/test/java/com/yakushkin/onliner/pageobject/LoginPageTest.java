@@ -37,7 +37,7 @@ public class LoginPageTest {
                 .clickOnRecaptchaCheckbox();
 
         catalogPage
-                .getNavigationTitle();
+                .verifyNavigationTitle();
     }
 
     @Test

@@ -21,12 +21,8 @@ public abstract class BasePage {
     }
 
     public BasePage open() {
-        navigateTo(StringUtils.EMPTY);
+        Selenide.open(StringUtils.EMPTY);
         return this;
-    }
-
-    public void navigateTo(String url) {
-        Selenide.open(url);
     }
 
     public SearchFrame typingIntoSearchLine(String request) {

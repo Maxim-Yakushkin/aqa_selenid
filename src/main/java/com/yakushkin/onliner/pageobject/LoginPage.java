@@ -1,5 +1,6 @@
 package com.yakushkin.onliner.pageobject;
 
+import static com.codeborne.selenide.Condition.and;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
@@ -21,22 +22,26 @@ public class LoginPage extends BasePage {
 
     public LoginPage clickOnLoginButton() {
         $x("//button[contains(text(),'Войти')]")
-                .shouldBe(exist, visible).click();
+                .shouldBe(and("clickable", exist, visible), ofSeconds(5))
+                .click();
 
         return this;
     }
 
     public void clickOnRecaptchaCheckbox() {
-        switchTo().frame($x("//iframe[@title='reCAPTCHA']"));
-        $x("//label[contains(text(),'Я не робот')]")
-                .shouldBe(exist, visible)
-                .click();
-        switchTo().defaultContent();
+        try {
+            switchTo().frame($x("//iframe[@title='reCAPTCHA']"));
+            $x("//label[contains(text(),'Я не робот')]")
+                    .shouldBe(and("clickable", exist, visible), ofSeconds(5))
+                    .click();
+        } finally {
+            switchTo().defaultContent();
+        }
     }
 
     public void clickOnCloseCross() {
         $x("//div[@class='auth-form__close']")
-                .shouldBe(exist, visible)
+                .shouldBe(and("clickable", exist, visible), ofSeconds(5))
                 .click();
     }
 }

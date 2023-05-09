@@ -6,6 +6,7 @@ import com.yakushkin.enumiration.SearchFrameTab;
 import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
+import java.util.function.Predicate;
 
 import static com.codeborne.selenide.CollectionCondition.allMatch;
 import static com.codeborne.selenide.CollectionCondition.exactTexts;
@@ -52,9 +53,8 @@ public class SearchFrame extends BasePage {
                 .shouldHave(allMatch("text for each element is not blank", el -> !el.getText().isBlank()))
                 .shouldHave(allMatch("category name is not blank", el ->
                         !el.getText().split("\n")[indexOfCategoryName].isBlank()))
-                .shouldHave(allMatch("info about count of items is not blank and contains key word", el ->
-                        !el.getText().split("\n")[indexOfCountOfItems].isBlank() &&
-                        el.getText().split("\n")[indexOfCountOfItems].toLowerCase().contains("товар")));
+                .shouldHave(allMatch("info about count of items is not blank and contains key word",
+                        checkItemCountInfo(indexOfCountOfItems)));
     }
 
     public ElementsCollection getNewsSearchResultWithVideo() {
@@ -63,5 +63,11 @@ public class SearchFrame extends BasePage {
                 .shouldHave(allMatch("contains preview and data", el ->
                         el.findElement(className("news__preview")).isDisplayed() &&
                         el.findElement(className("news__data")).isDisplayed()));
+    }
+
+    private static Predicate<WebElement> checkItemCountInfo(int indexOfCountOfItems) {
+        return el ->
+                !el.getText().split("\n")[indexOfCountOfItems].isBlank() &&
+                el.getText().split("\n")[indexOfCountOfItems].toLowerCase().contains("товар");
     }
 }
