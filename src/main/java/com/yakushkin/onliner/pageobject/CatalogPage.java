@@ -103,31 +103,18 @@ public class CatalogPage extends BasePage {
     }
 
     public CatalogPage verifyCategoriesForAccessories() {
-        final ElementsCollection categories = $$x(String.format(ALL_CATEGORIES_BY_POINT_FROM_VERTICAL_MENU_XPATH_PATTERN, "Комплектующие"))
+        $$x(String.format(ALL_CATEGORIES_BY_POINT_FROM_VERTICAL_MENU_XPATH_PATTERN, "Комплектующие"))
                 .shouldBe(allMatch("visible", WebElement::isDisplayed))
                 .shouldHave(allMatch("title is not blank", element ->
                         !element.findElement(className("catalog-navigation-list__dropdown-title")).getText().isBlank()))
                 .shouldHave(allMatch("count of goods is not blank", element ->
                         !element.findElement(className("catalog-navigation-list__dropdown-description"))
-                                .getText().split("\n")[0].isBlank()))
+                                .getText().split("\n")[0].isBlank())) // 0 - index of count of goods in description
                 .shouldHave(allMatch("start price of goods is not blank", element ->
                         !element.findElement(className("catalog-navigation-list__dropdown-description"))
-                                .getText().split("\n")[1].isBlank()));
+                                .getText().split("\n")[1].isBlank())); // 1 - index of start price in description
 
         return this;
-    }
-
-    public static List<String[]> getDividedCategoryInfo(ElementsCollection categories) {
-        return categories.texts().stream()
-                .map(description -> description.split("\n"))
-                .toList();
-    }
-
-    public static List<String> getPartOfCategoryInfos(int indexOfDescriptionPart, List<String[]> categories) {
-        return categories.stream()
-                .map(description -> description[indexOfDescriptionPart])
-                .filter(partOfDescription -> !partOfDescription.isBlank())
-                .toList();
     }
 
     public CatalogPage verifyComputerAndNetworksVerticalMenuPoints() {
