@@ -3,6 +3,7 @@ package com.yakushkin.onliner.pageobject;
 import com.codeborne.selenide.Selenide;
 import com.yakushkin.enumiration.CatalogNavigationClassifier;
 import com.yakushkin.enumiration.ComputerAndNetworksVerticalMenuPoint;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class CatalogPage extends BasePage {
     private static final String CATEGORY_XPATH_PATTERN = "//div[contains(text(),'%s')]/parent::*//span[contains(text(),'%s')]";
 
     @Override
+    @Step("open Onliner Catalog page ( https://catalog.onliner.by/ )")
     public CatalogPage open() {
         Selenide.open(CATALOG_PAGE.getUrl());
         webdriver()
@@ -41,6 +43,7 @@ public class CatalogPage extends BasePage {
         return this;
     }
 
+    @Step("verify the Catalog page has correct url, browser title and page title")
     public CatalogPage verifyNavigationTitle() {
         webdriver()
                 .shouldHave(url(CATALOG_PAGE.getUrl()))
@@ -53,6 +56,7 @@ public class CatalogPage extends BasePage {
         return this;
     }
 
+    @Step("verify the Catalog page contains all necessary classifiers in navigation bar")
     public CatalogPage verifyCatalogNavigationClassifiers() {
         final List<String> expectedClassifierTitles = stream(CatalogNavigationClassifier.values())
                 .map(CatalogNavigationClassifier::getTitle)
@@ -65,6 +69,7 @@ public class CatalogPage extends BasePage {
         return this;
     }
 
+    @Step("click by 'Компьютеры и сети' classifier")
     public CatalogPage clickOnComputersAndNetworksClassifier() {
         $x(String.format(CATALOG_CLASSIFIER_XPATH_PATTERN, "Компьютеры"))
                 .shouldBe(visible, ofSeconds(10))
@@ -73,6 +78,7 @@ public class CatalogPage extends BasePage {
     }
 
 
+    @Step("click by 'Электроника' classifier")
     public CatalogPage clickOnElectronicsClassifier() {
         $x(String.format(CATALOG_CLASSIFIER_XPATH_PATTERN, "Электроника"))
                 .shouldBe(visible, ofSeconds(10))
@@ -80,6 +86,7 @@ public class CatalogPage extends BasePage {
         return this;
     }
 
+    @Step("click by 'Наушники' category")
     public CategoryPage clickOnHeadPhoneCategory() {
         $x(String.format(CATEGORY_XPATH_PATTERN, "Аудиотехника", "Наушники"))
                 .shouldBe(visible, ofSeconds(10))
@@ -87,6 +94,7 @@ public class CatalogPage extends BasePage {
         return new CategoryPage();
     }
 
+    @Step("hover to 'Комплектующие' title")
     public CatalogPage hoverToAccessoriesAsideTitle() {
         $x(String.format(COMPUTER_AND_NETWORKS_VERTICAL_MENU_XPATH_PATTERN, "Комплектующие"))
                 .shouldBe(visible, ofSeconds(10))
@@ -94,6 +102,7 @@ public class CatalogPage extends BasePage {
         return this;
     }
 
+    @Step("hover to 'Аудиотехника' title")
     public CatalogPage hoverToAudioEquipmentAsideTitle() {
         $x(String.format(COMPUTER_AND_NETWORKS_VERTICAL_MENU_XPATH_PATTERN, "Аудиотехника"))
                 .shouldBe(visible, ofSeconds(10))
@@ -101,6 +110,7 @@ public class CatalogPage extends BasePage {
         return this;
     }
 
+    @Step("verify the each goods category in 'Комплектующие' has title, count of goods and start price")
     public CatalogPage verifyCategoriesForAccessories() {
         $$x(String.format(ALL_CATEGORIES_BY_POINT_FROM_VERTICAL_MENU_XPATH_PATTERN, "Комплектующие"))
                 .shouldBe(allMatch("visible", WebElement::isDisplayed))
@@ -116,6 +126,7 @@ public class CatalogPage extends BasePage {
         return this;
     }
 
+    @Step("verify the vertical menu contains necessary pints in 'Компьютеры и сети' classifier")
     public CatalogPage verifyComputerAndNetworksVerticalMenuPoints() {
         final List<String> expectedVerticalMenuPointTitles = stream(ComputerAndNetworksVerticalMenuPoint.values())
                 .map(ComputerAndNetworksVerticalMenuPoint::getName)

@@ -30,6 +30,6 @@ public class MainPageTest {
     public void goToCatalogSection() {
         mainPage
                 .open()
-                .goToCatalogSection();
+                .clickOnCatalogSection();
     }
 }

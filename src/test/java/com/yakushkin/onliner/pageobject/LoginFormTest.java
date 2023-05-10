@@ -26,12 +26,12 @@ public class LoginFormTest {
         mainPage
                 .open()
                 .clickOnEnterButton()
-                .typingCredentials("***", "***") // type e-mail and password instead ***
+                .typingCredentials("max-yakushkin1@yandex.ru", "MaxiOr3320!&@") // type e-mail and password instead ***
                 .clickOnLoginButton()
                 .clickOnRecaptchaCheckbox();
 
         mainPage
-                .getNavigationLogo();
+                .verifyNavigationLogo();
     }
 
     @Test
@@ -40,7 +40,7 @@ public class LoginFormTest {
         catalogPage
                 .open()
                 .clickOnEnterButton()
-                .typingCredentials("***", "***") // type e-mail and password instead ***
+                .typingCredentials("max-yakushkin1@yandex.ru", "MaxiOr3320!&@") // type e-mail and password instead ***
                 .clickOnLoginButton()
                 .clickOnRecaptchaCheckbox();
 
@@ -56,6 +56,6 @@ public class LoginFormTest {
                 .clickOnCloseCross();
 
         mainPage
-                .getNavigationLogo();
+                .verifyNavigationLogo();
     }
 }

@@ -3,6 +3,7 @@ package com.yakushkin.onliner.pageobject;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
@@ -30,6 +31,7 @@ public abstract class BasePage {
         return this;
     }
 
+    @Step("typing to search line the next request '{request}'")
     public SearchFrame typingIntoSearchLine(String request) {
         $x("//input[@class='fast-search__input']")
                 .shouldBe(visible, ofSeconds(5))
@@ -39,6 +41,7 @@ public abstract class BasePage {
         return new SearchFrame();
     }
 
+    @Step("switch to search frame")
     public SearchFrame switchToSearchFrame() {
         final SelenideElement searchFrame = $x("//iframe[@class='modal-iframe']")
                 .should(and("active", exist, visible), ofSeconds(5));
@@ -47,6 +50,7 @@ public abstract class BasePage {
         return new SearchFrame();
     }
 
+    @Step("click on 'Вход' button")
     public LoginForm clickOnEnterButton() {
         $x("//div[contains(text(),'Вход')]")
                 .shouldBe(visible, ofSeconds(5))

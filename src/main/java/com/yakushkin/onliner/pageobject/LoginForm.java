@@ -1,6 +1,7 @@
 package com.yakushkin.onliner.pageobject;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 
 import static com.codeborne.selenide.Condition.and;
@@ -18,6 +19,7 @@ public class LoginForm {
                 .savePageSource(false));
     }
 
+    @Step("typing the login and password into login form")
     public LoginForm typingCredentials(String userNameOrEmail, String password) {
         $x("//input[contains(@placeholder,'Ник или e-mail')]")
                 .shouldBe(visible, ofSeconds(5))
@@ -29,6 +31,7 @@ public class LoginForm {
         return this;
     }
 
+    @Step("click on the 'Войти' button")
     public LoginForm clickOnLoginButton() {
         $x("//button[contains(text(),'Войти')]")
                 .shouldBe(and("clickable", exist, visible), ofSeconds(5))
@@ -37,6 +40,7 @@ public class LoginForm {
         return this;
     }
 
+    @Step("click on the recaptcha checkbox near 'Я не робот' line")
     public void clickOnRecaptchaCheckbox() {
         try {
             switchTo().frame($x("//iframe[@title='reCAPTCHA']"));
@@ -48,6 +52,7 @@ public class LoginForm {
         }
     }
 
+    @Step("click on the closing cross in login form")
     public void clickOnCloseCross() {
         $x("//div[@class='auth-form__close']")
                 .shouldBe(and("clickable", exist, visible), ofSeconds(5))

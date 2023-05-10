@@ -2,6 +2,7 @@ package com.yakushkin.onliner.pageobject;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.and;
 import static com.codeborne.selenide.Condition.exist;
@@ -19,6 +20,7 @@ public class MainPage extends BasePage {
                                                                         "//span[text()='%s']/parent::*";
 
     @Override
+    @Step("open Onliner home page ( https://www.onliner.by/ )")
     public MainPage open() {
         Selenide.open(MAIN_PAGE.getUrl());
         webdriver()
@@ -28,7 +30,8 @@ public class MainPage extends BasePage {
         return this;
     }
 
-    public SelenideElement getNavigationLogo() {
+    @Step("verify Onliner navigation logo is present")
+    public SelenideElement verifyNavigationLogo() {
         webdriver()
                 .shouldHave(url(MAIN_PAGE.getUrl()))
                 .shouldHave(title(MAIN_PAGE.getTitle()));
@@ -37,7 +40,8 @@ public class MainPage extends BasePage {
                 .shouldBe(and("presented and displayed", exist, visible), ofSeconds(5));
     }
 
-    public CatalogPage goToCatalogSection() {
+    @Step("click on 'Каталог' section in main navigation bar")
+    public CatalogPage clickOnCatalogSection() {
         $x(String.format(MAIN_NAVIGATION_SECTION_XPATH_PATTERN, "Каталог"))
                 .shouldBe(visible, ofSeconds(10))
                 .click();
