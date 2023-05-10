@@ -42,11 +42,11 @@ public abstract class BasePage {
         return new SearchFrame();
     }
 
-    public LoginPage clickOnEnterButton() {
+    public LoginForm clickOnEnterButton() {
         $x("//div[contains(text(),'Вход')]")
                 .shouldBe(visible, ofSeconds(5))
                 .click();
 
-        return new LoginPage();
+        return new LoginForm();
     }
 }

@@ -7,9 +7,9 @@ import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static java.time.Duration.ofSeconds;
 
-public class LoginPage extends BasePage {
+public class LoginForm {
 
-    public LoginPage typingCredentials(String userNameOrEmail, String password) {
+    public LoginForm typingCredentials(String userNameOrEmail, String password) {
         $x("//input[contains(@placeholder,'Ник или e-mail')]")
                 .shouldBe(visible, ofSeconds(5))
                 .setValue(userNameOrEmail);
@@ -20,7 +20,7 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public LoginPage clickOnLoginButton() {
+    public LoginForm clickOnLoginButton() {
         $x("//button[contains(text(),'Войти')]")
                 .shouldBe(and("clickable", exist, visible), ofSeconds(5))
                 .click();

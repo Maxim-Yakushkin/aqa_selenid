@@ -21,7 +21,7 @@ public class SearchFrameTest {
         mainPage
                 .open()
                 .typingIntoSearchLine("lego")
-                .getAllSearchTabItems();
+                .verifyAllSearchTabItems();
     }
 
     @Test
@@ -29,7 +29,7 @@ public class SearchFrameTest {
         mainPage
                 .open()
                 .typingIntoSearchLine("lego")
-                .getCatalogSearchResultCategories();
+                .verifyCatalogSearchResultCategories();
     }
 
     @Test
@@ -39,6 +39,6 @@ public class SearchFrameTest {
                 .typingIntoSearchLine("lego")
                 .clickOnNews()
                 .clickInNewsOnVideoFilterCheckbox()
-                .getNewsSearchResultWithVideo();
+                .verifyNewsSearchResultWithVideo();
     }
 }

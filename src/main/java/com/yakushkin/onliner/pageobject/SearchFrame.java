@@ -17,9 +17,9 @@ import static com.codeborne.selenide.Selenide.$x;
 import static java.util.Arrays.stream;
 import static org.openqa.selenium.By.className;
 
-public class SearchFrame extends BasePage {
+public class SearchFrame {
 
-    public ElementsCollection getAllSearchTabItems() {
+    public ElementsCollection verifyAllSearchTabItems() {
         return $$x("//div[contains(@class,'search__tabs-item')]")
                 .shouldBe(allMatch("all elements displayed", WebElement::isDisplayed))
                 .shouldHave(allMatch("text for each element is not blank", el -> !el.getText().isBlank()))
@@ -28,7 +28,7 @@ public class SearchFrame extends BasePage {
     }
 
     public SearchFrame clickOnNews() {
-        getAllSearchTabItems()
+        verifyAllSearchTabItems()
                 .filter(Condition.text(SearchFrameTab.IN_NEWS.getName()))
                 .first()
                 .click();
@@ -44,7 +44,7 @@ public class SearchFrame extends BasePage {
         return this;
     }
 
-    public ElementsCollection getCatalogSearchResultCategories() {
+    public ElementsCollection verifyCatalogSearchResultCategories() {
         int indexOfCategoryName = 0;
         int indexOfCountOfItems = 1;
 
@@ -57,7 +57,7 @@ public class SearchFrame extends BasePage {
                         checkItemCountInfo(indexOfCountOfItems)));
     }
 
-    public ElementsCollection getNewsSearchResultWithVideo() {
+    public ElementsCollection verifyNewsSearchResultWithVideo() {
         return $$x("//div[contains(@class,'result__item result__item_news')]")
                 .shouldBe(allMatch("displayed", WebElement::isDisplayed))
                 .shouldHave(allMatch("contains preview and data", el ->
