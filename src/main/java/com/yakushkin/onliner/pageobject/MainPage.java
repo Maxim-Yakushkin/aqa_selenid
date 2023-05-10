@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.webdriver;
 import static com.codeborne.selenide.WebDriverConditions.title;
 import static com.codeborne.selenide.WebDriverConditions.url;
+import static com.yakushkin.enumiration.OnlinerBaseUrl.CATALOG_PAGE;
 import static com.yakushkin.enumiration.OnlinerBaseUrl.MAIN_PAGE;
 import static java.time.Duration.ofSeconds;
 
@@ -40,6 +41,11 @@ public class MainPage extends BasePage {
         $x(String.format(MAIN_NAVIGATION_SECTION_XPATH_PATTERN, "Каталог"))
                 .shouldBe(visible, ofSeconds(10))
                 .click();
+
+        webdriver()
+                .shouldHave(url(CATALOG_PAGE.getUrl()))
+                .shouldHave(title(CATALOG_PAGE.getTitle()));
+
         return new CatalogPage();
     }
 }

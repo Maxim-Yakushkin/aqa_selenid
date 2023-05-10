@@ -1,11 +1,14 @@
 package com.yakushkin.onliner.pageobject;
 
 import com.codeborne.selenide.Browsers;
+import com.codeborne.selenide.testng.SoftAsserts;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.yakushkin.framework.DriverManager.initDriver;
 
+@Listeners({ SoftAsserts.class})
 public class SearchFrameTest {
 
     private MainPage mainPage;
