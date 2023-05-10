@@ -2,7 +2,9 @@ package com.yakushkin.onliner.pageobject;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import com.yakushkin.enumiration.SearchFrameTab;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
@@ -18,6 +20,12 @@ import static java.util.Arrays.stream;
 import static org.openqa.selenium.By.className;
 
 public class SearchFrame {
+
+    public SearchFrame() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false));
+    }
 
     public ElementsCollection verifyAllSearchTabItems() {
         return $$x("//div[contains(@class,'search__tabs-item')]")

@@ -1,6 +1,5 @@
 package com.yakushkin.onliner.pageobject;
 
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.yakushkin.enumiration.CatalogNavigationClassifier;
 import com.yakushkin.enumiration.ComputerAndNetworksVerticalMenuPoint;

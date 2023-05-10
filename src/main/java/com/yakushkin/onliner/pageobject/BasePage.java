@@ -2,6 +2,8 @@ package com.yakushkin.onliner.pageobject;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
@@ -17,6 +19,9 @@ import static java.time.Duration.ofSeconds;
 public abstract class BasePage {
 
     public BasePage() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false));
         initDriver();
     }
 

@@ -1,5 +1,8 @@
 package com.yakushkin.onliner.pageobject;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+
 import static com.codeborne.selenide.Condition.and;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
@@ -8,6 +11,12 @@ import static com.codeborne.selenide.Selenide.switchTo;
 import static java.time.Duration.ofSeconds;
 
 public class LoginForm {
+
+    public LoginForm() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false));
+    }
 
     public LoginForm typingCredentials(String userNameOrEmail, String password) {
         $x("//input[contains(@placeholder,'Ник или e-mail')]")
