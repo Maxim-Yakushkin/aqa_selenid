@@ -3,6 +3,8 @@ package com.yakushkin.onliner.pageobject;
 import com.codeborne.selenide.AssertionMode;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.testng.SoftAsserts;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -21,6 +23,7 @@ public class LoginFormTest {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     void loginFromMainPage() {
         Configuration.assertionMode = AssertionMode.SOFT;
         mainPage
@@ -35,6 +38,7 @@ public class LoginFormTest {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     void loginFromCatalogPage() {
         Configuration.assertionMode = AssertionMode.SOFT;
         catalogPage
