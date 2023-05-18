@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class PropertiesReader {
 
-    private static final String ENDPOINT_PROPERTY_FILE = "/application.properties";
+    private static final String APPLICATION_PROPERTY_FILE = "/application.properties";
     private static final Properties PROPERTIES = new Properties();
 
     static {
@@ -18,10 +18,11 @@ public class PropertiesReader {
     }
 
     private static void initProperties() {
-        try (InputStream inputStream = PropertiesReader.class.getResourceAsStream(PropertiesReader.ENDPOINT_PROPERTY_FILE)) {
+        try (InputStream inputStream = PropertiesReader.class.getResourceAsStream(PropertiesReader.APPLICATION_PROPERTY_FILE)) {
             PropertiesReader.PROPERTIES.load(inputStream);
         } catch (IOException e) {
-            throw new IllegalArgumentException("Unable to load properties from file " + PropertiesReader.ENDPOINT_PROPERTY_FILE);
+            throw new IllegalArgumentException("Unable to load properties from file " +
+                                               PropertiesReader.APPLICATION_PROPERTY_FILE);
         }
     }
 }
