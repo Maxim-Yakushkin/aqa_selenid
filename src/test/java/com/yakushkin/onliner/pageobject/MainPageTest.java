@@ -17,7 +17,7 @@ public class MainPageTest {
     @BeforeClass
     void init() {
         closeWebDriver();
-        initDriver(Browsers.CHROME);
+//        initDriver(Browsers.CHROME);
         mainPage = new MainPage();
     }
 

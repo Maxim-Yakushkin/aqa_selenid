@@ -1,4 +1,4 @@
-package com.util;
+package com.yakushkin.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class PropertiesReader {
 
-    private static final String ENDPOINT_PROPERTY_FILE = "/endpoint.properties";
+    private static final String ENDPOINT_PROPERTY_FILE = "/application.properties";
     private static final Properties PROPERTIES = new Properties();
 
     static {

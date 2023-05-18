@@ -1,9 +1,9 @@
 package com.yakushkin.onliner.api.endpoint;
 
-import com.util.PropertiesReader;
+import static com.yakushkin.util.PropertiesReader.getProperty;
 
 public class OnlinerEndpoint {
 
-    public static String SUSHIVESLA_ENDPOINT = PropertiesReader.getProperty("api.sushivesla.endpoint");
+    public static String SUSHIVESLA_ENDPOINT = getProperty("endpoint.api.sushivesla");
 
 }

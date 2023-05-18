@@ -3,6 +3,7 @@ package com.yakushkin.onliner.pageobject;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import com.yakushkin.framework.DriverManager;
 import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.Data;
@@ -13,7 +14,7 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.switchTo;
-import static com.yakushkin.framework.DriverManager.initDriver;
+import static com.yakushkin.framework.DriverManager.initApplicationDefaultDriver;
 import static java.time.Duration.ofSeconds;
 
 @Data
@@ -23,7 +24,7 @@ public abstract class BasePage {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
                 .savePageSource(false));
-        initDriver();
+        initApplicationDefaultDriver();
     }
 
     public BasePage open() {
